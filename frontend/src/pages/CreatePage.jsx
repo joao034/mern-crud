@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { useToast } from "@/hooks/use-toast"
 import { useProductStore } from "@/store/product.store"
 import { useState } from "react"
 
@@ -20,12 +21,22 @@ export const CreatePage = () => {
     image: ''
   });
 
+  const { toast } = useToast()
   const { createProduct } = useProductStore()
 
   const onSaveProduct = async () => {
     const { success, message } = await createProduct( product )
-    console.log('Success', success)
-    console.log('message', message)
+    if( !success ){
+      toast({
+        title: 'Error',
+        description: message
+      })
+    }else{
+      toast({
+        title: 'Success',
+        description: message
+      })
+    }
   }
 
   return (
