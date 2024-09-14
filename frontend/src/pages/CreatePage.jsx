@@ -37,6 +37,13 @@ export const CreatePage = () => {
         description: message
       })
     }
+
+    setProduct({
+      name: '',
+      price: '',
+      image: ''
+    })
+
   }
 
   return (
