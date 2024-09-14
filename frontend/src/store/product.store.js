@@ -17,17 +17,29 @@ export const useProductStore = create((set) => ({
 
         const data = res.json();
         set((state) => ({ products: [...state.products, data.data] }))
-        return {success: true, message: 'Product created successfully'}
+        return { success: true, message: 'Product created successfully' }
     },
-    getProducts: async() => {
+    getProducts: async () => {
         const res = await fetch('/api/products');
 
-        if( res.ok ){
+        if (res.ok) {
             const data = await res.json()
-            set( { products: data.data } )
-        }else{
-            return {success:false, message: `There aren't products`}
+            set({ products: data.data })
+        } else {
+            return { success: false, message: `There aren't products` }
         }
-            
+    },
+    deleteProduct: async (product_id) => {
+        const res = await fetch(`/api/products/${product_id}`, {
+            method: 'DELETE'
+        })
+
+        const data = await res.json()
+
+        if (!data.success) return { success: false, message: data.message }
+
+        set((state) => ({ products: state.products.filter(product => product._id !== product_id) }));
+        return { success: true, message: data.message }
+
     }
 }))

@@ -9,7 +9,8 @@ import {
 import { Button } from "./ui/button"
 
 
-export const ProductCard = ({ _id, name, price, image }) => {
+export const ProductCard = ({ _id, name, price, image, onDeleteProduct }) => {
+
     return (
         <Card>
             <CardHeader>
@@ -21,7 +22,7 @@ export const ProductCard = ({ _id, name, price, image }) => {
             </CardContent>
             <CardFooter className="space-x-2">
                 <Button>Edit</Button>
-                <Button>Delete</Button>
+                <Button onClick={ () => onDeleteProduct( _id ) } >Delete</Button>
             </CardFooter>
         </Card>
 
