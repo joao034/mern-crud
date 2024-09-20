@@ -6,12 +6,13 @@ import { useState } from "react"
 
 export const CreatePage = () => {
 
-  const [product, setProduct] = useState({
+  const initialState = {
     name: '',
     price: '',
     image: ''
-  });
+  }
 
+  const [product, setProduct] = useState( initialState );
   const { toast } = useToast()
   const { createProduct } = useProductStore()
 
@@ -27,14 +28,8 @@ export const CreatePage = () => {
         title: 'Success',
         description: message
       })
+      setProduct( initialState )
     }
-
-    setProduct({
-      name: '',
-      price: '',
-      image: ''
-    })
-
   }
 
   return (
