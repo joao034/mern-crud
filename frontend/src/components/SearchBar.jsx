@@ -11,10 +11,12 @@ export const SearchBar = () => {
     }
 
     return (
-        <Input className="m-4 max-w-screen-md" placeholder="Search a product by name"
-            onKeyDown={handleKeyDown}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)} />
+        <div className="mr-8">
+            <Input className="m-4 w-full md:max-w-screen-md" placeholder="Search a product by name"
+                onKeyDown={handleKeyDown}
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)} />
+        </div>
     )
 }
 
