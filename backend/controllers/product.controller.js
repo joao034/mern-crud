@@ -74,3 +74,19 @@ export const deleteProduct = async (req, res) => {
 
 };
 
+export const searchProductByName = async ( req, res ) => {
+    const searchQuery  = req.query.q.trim();
+    
+    try{
+        const products = await Product.find( { name: new RegExp( searchQuery, 'i') } );
+
+        if( products.length > 0 )
+            res.status( 200 ).json({ success: true, data: products })
+        else
+            res.status( 404 ).json( { success: false, message: 'Not products found'})
+
+    }catch( error ){
+        res.status( 500 ).json( { success: false, message: 'Server error', error})
+    }
+}
+
