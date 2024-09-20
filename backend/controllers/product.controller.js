@@ -77,6 +77,9 @@ export const deleteProduct = async (req, res) => {
 export const searchProductByName = async ( req, res ) => {
     const searchQuery  = req.query.q.trim();
     
+    /* if( searchQuery.length <= 0 )
+        return res.status( 500 ).json( { success: false, message:'Provide a query parameter' } ) */
+
     try{
         const products = await Product.find( { name: new RegExp( searchQuery, 'i') } );
 
